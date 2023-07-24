@@ -2,7 +2,7 @@
 <html>
 <head>
 <style>
-* {
+
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -57,10 +57,7 @@ h1 {
 }
 
 .canal {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 120px;
+  width: 150px;
   margin: 0 10px 20px;
   padding: 10px;
   background-color: #ffff;
@@ -68,35 +65,30 @@ h1 {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   transition: box-shadow 0.3s ease;
+  text-align: center;
 }
 
-.logo-container {
-  position: relative;
+.canal:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .logo {
   width: 100px;
   height: 100px;
+  margin-bottom: 10px;
   object-fit: cover;
-}
-
-.corazon {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  font-size: 20px;
 }
 
 .nombre {
   font-weight: bold;
   font-size: 14px;
-  margin-top: 5px;
+  margin-bottom: 1px;
 }
 
 .categoria-canal {
   font-size: 12px;
   color: #a8a8a8;
-  margin-top: 2px;
+  margin-left: 10px;
 }
 
 /* Estilo para las categorías */
@@ -193,7 +185,7 @@ h1 {
 <body>
  
   <header>
-    <h1>Reproductor de IP TV</h1>
+    <h1>Reproductor 8</h1>
   </header>
 
   <div id="reproductor">
@@ -210,8 +202,8 @@ h1 {
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-  consdocument.addEventListener('DOMContentLoaded', function() {
   const archivoM3U = 'https://raw.githubusercontent.com/Pamanya/canales/main/List.m3u';
+  
   cargarListaReproduccion(archivoM3U)
     .then(() => {
       return cargarFavoritos();
@@ -226,9 +218,6 @@ const canales = [];
 const favoritos = [];
 
 function cargarListaReproduccion(archivo) {
-  // Modificar la URL para acceder a través de HTTPS
-  archivo = archivo.replace("http://", "https://");
-  
   return fetch(archivo)
     .then(response => response.text())
     .then(data => {
@@ -252,7 +241,7 @@ function cargarListaReproduccion(archivo) {
             nombre: nombre,
             logo: logo,
             categoria: categoria,
-            url: url,
+            url: url.replace(/^http:/i, 'https:'), // Reemplazar "http" por "https"
             esFavorito: false,
             mostrar: true
           };
@@ -358,7 +347,7 @@ function filtrarPorCategoria(categoria) {
   }
 
   cargarCanales(canales);
-
+  
   const categoriasDiv = document.getElementById('categorias');
   const categorias = categoriasDiv.getElementsByClassName('categoria');
 
@@ -412,11 +401,6 @@ function toggleFavorito(nombre) {
   guardarFavoritos(favoritos); // Guardar los favoritos actualizados en el almacenamiento local
   cargarCanales(canales);
 }
-``
-
-
-
 </script>
 </body>
-      </html>
-      
+</html>
