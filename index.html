@@ -185,7 +185,7 @@ h1 {
 <body>
  
   <header>
-    <h1>Reproductor de TV</h1>
+    <h1>Reproductor de 7TV</h1>
   </header>
 
   <div id="reproductor">
@@ -219,7 +219,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 const canales = [];
 const favoritos = [];
-const corsAnywhereUrl = 'https://cors-anywhere.herokuapp.com/'; // Proxy cors-anywhere
 
 function cargarListaReproduccion(archivo) {
   return fetch(archivo)
@@ -240,19 +239,23 @@ function cargarListaReproduccion(archivo) {
 
           // Asegurarse de que el enlace comience con "http://" o "https://"
           if (!/^https?:\/\//i.test(url)) {
-            url = corsAnywhereUrl + url;
+            // Verificar si se puede acceder a la URL mediante HTTPS
+            fetch('https://' + url, { method: 'HEAD' })
+              .then(response => {
+                if (response.ok) {
+                  url = 'https://' + url;
+                } else {
+                  url = 'http://' + url;
+                }
+                guardarCanal(nombre, logo, categoria, url);
+              })
+              .catch(() => {
+                url = 'http://' + url;
+                guardarCanal(nombre, logo, categoria, url);
+              });
+          } else {
+            guardarCanal(nombre, logo, categoria, url);
           }
-
-          const canal = {
-            nombre: nombre,
-            logo: logo,
-            categoria: categoria,
-            url: url,
-            esFavorito: false,
-            mostrar: true
-          };
-
-          canales.push(canal);
 
           if (!categorias[categoria]) {
             categorias[categoria] = true;
@@ -275,8 +278,18 @@ function cargarListaReproduccion(archivo) {
     });
 }
 
-// ... (el resto del código permanece sin cambios)
+function guardarCanal(nombre, logo, categoria, url) {
+  const canal = {
+    nombre: nombre,
+    logo: logo,
+    categoria: categoria,
+    url: url,
+    esFavorito: false,
+    mostrar: true
+  };
 
+  canales.push(canal);
+}
 
 function cargarCanales(canales) {
   const listaDiv = document.getElementById('lista');
@@ -367,7 +380,7 @@ function filtrarPorCategoria(categoria) {
   }
 
   cargarCanales(canales);
-  
+
   const categoriasDiv = document.getElementById('categorias');
   const categorias = categoriasDiv.getElementsByClassName('categoria');
 
