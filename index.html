@@ -185,7 +185,7 @@ h1 {
 <body>
  
   <header>
-    <h1>Reproductor de 9 TV</h1>
+    <h1>Reproductor de TV</h1>
   </header>
 
   <div id="reproductor">
@@ -219,6 +219,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 const canales = [];
 const favoritos = [];
+const corsAnywhereUrl = 'https://cors-anywhere.herokuapp.com/'; // Proxy cors-anywhere
 
 function cargarListaReproduccion(archivo) {
   return fetch(archivo)
@@ -239,7 +240,7 @@ function cargarListaReproduccion(archivo) {
 
           // Asegurarse de que el enlace comience con "http://" o "https://"
           if (!/^https?:\/\//i.test(url)) {
-            url = 'http://' + url;
+            url = corsAnywhereUrl + url;
           }
 
           const canal = {
@@ -273,6 +274,9 @@ function cargarListaReproduccion(archivo) {
       }
     });
 }
+
+// ... (el resto del código permanece sin cambios)
+
 
 function cargarCanales(canales) {
   const listaDiv = document.getElementById('lista');
