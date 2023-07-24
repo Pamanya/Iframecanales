@@ -185,7 +185,7 @@ h1 {
 <body>
  
   <header>
-    <h1>Reproductor 8</h1>
+    <h1>Reproductor de 9 TV</h1>
   </header>
 
   <div id="reproductor">
@@ -203,7 +203,7 @@ h1 {
 <script>
 document.addEventListener('DOMContentLoaded', function() {
   const archivoM3U = 'https://raw.githubusercontent.com/Pamanya/canales/main/List.m3u';
-  
+
   cargarListaReproduccion(archivoM3U)
     .then(() => {
       return cargarFavoritos();
@@ -211,6 +211,9 @@ document.addEventListener('DOMContentLoaded', function() {
     .then(() => {
       // Después de cargar los favoritos y la lista de reproducción, mostrar los canales
       cargarCanales(canales);
+    })
+    .catch(error => {
+      console.error('Error al cargar la lista de reproducción:', error);
     });
 });
 
@@ -226,22 +229,24 @@ function cargarListaReproduccion(archivo) {
       const listaDiv = document.getElementById('lista');
       const categoriasDiv = document.getElementById('categorias');
 
-      const categoriaFavoritosDiv = crearCategoria('Favoritos');
-      categoriasDiv.appendChild(categoriaFavoritosDiv);
-
       for (let i = 0; i < lineas.length; i++) {
         const linea = lineas[i].trim();
         if (linea.startsWith('#EXTINF:-1')) {
           const nombre = linea.split('tvg-name="')[1].split('"')[0];
           const logo = linea.split('tvg-logo="')[1].split('"')[0];
           const categoria = linea.split('group-title="')[1].split('"')[0];
-          const url = lineas[i + 1].trim();
+          let url = lineas[i + 1].trim();
+
+          // Asegurarse de que el enlace comience con "http://" o "https://"
+          if (!/^https?:\/\//i.test(url)) {
+            url = 'http://' + url;
+          }
 
           const canal = {
             nombre: nombre,
             logo: logo,
             categoria: categoria,
-            url: url.replace(/^http:/i, 'https:'), // Reemplazar "http" por "https"
+            url: url,
             esFavorito: false,
             mostrar: true
           };
@@ -250,10 +255,21 @@ function cargarListaReproduccion(archivo) {
 
           if (!categorias[categoria]) {
             categorias[categoria] = true;
-            const categoriaDiv = crearCategoria(categoria);
-            categoriasDiv.appendChild(categoriaDiv);
           }
         }
+      }
+
+      // Limpiar contenido previo de listas y categorías
+      listaDiv.innerHTML = '';
+      categoriasDiv.innerHTML = '';
+
+      // Crear elementos de categorías
+      const categoriaFavoritosDiv = crearCategoria('Favoritos');
+      categoriasDiv.appendChild(categoriaFavoritosDiv);
+
+      for (const categoria in categorias) {
+        const categoriaDiv = crearCategoria(categoria);
+        categoriasDiv.appendChild(categoriaDiv);
       }
     });
 }
