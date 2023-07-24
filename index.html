@@ -210,8 +210,8 @@ h1 {
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+  consdocument.addEventListener('DOMContentLoaded', function() {
   const archivoM3U = 'https://raw.githubusercontent.com/Pamanya/canales/main/List.m3u';
-  
   cargarListaReproduccion(archivoM3U)
     .then(() => {
       return cargarFavoritos();
@@ -226,6 +226,9 @@ const canales = [];
 const favoritos = [];
 
 function cargarListaReproduccion(archivo) {
+  // Modificar la URL para acceder a través de HTTPS
+  archivo = archivo.replace("http://", "https://");
+  
   return fetch(archivo)
     .then(response => response.text())
     .then(data => {
