@@ -1,204 +1,177 @@
 <!DOCTYPE html>
 <html>
 <head>
-<style>
+    <link href="https://vjs.zencdn.net/7.15.4/video-js.css" rel="stylesheet">
+    <script src="https://vjs.zencdn.net/7.15.4/video.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #f2f2f2;
+            font-family: Arial, sans-serif;
+        }
 
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+        header {
+            background-color: #333;
+            padding: 20px;
+            color: #fff;
+        }
 
-body {
-  background-color: #f2f2f2;
-  font-family: Arial, sans-serif;
-}
+        h1 {
+            margin: 0;
+            font-size: 24px;
+        }
 
-header {
-  background-color: #333;
-  padding: 20px;
-  color: #fff;
-}
+        #video-container {
+            width: 100%;
+            max-width: 800px;
+            height: 0;
+            padding-bottom: 56.25%;
+            margin: 20px auto;
+            position: relative;
+        }
 
-h1 {
-  margin: 0;
-  font-size: 24px;
-}
+        #videoPlayer {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
 
-#reproductor {
-  width: 100%;
-  max-width: 800px;
-  height: 0;
-  padding-bottom: 56.25%;
-  margin: 20px auto;
-  position: relative;
-}
+        #lista-wrapper {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            overflow-y: auto;
+            max-height: 400px;
+        }
 
-#videoPlayer {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
+        #lista {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
 
-#lista-wrapper {
-  width: 100%;
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-  overflow-y: auto;
-  max-height: 400px;
-}
+        .canal {
+            width: 150px;
+            margin: 0 10px 20px;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: box-shadow 0.3s ease;
+            text-align: center;
+        }
 
-#lista {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
+        .canal:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
 
-.canal {
-  width: 150px;
-  margin: 0 10px 20px;
-  padding: 10px;
-  background-color: #ffff;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-  transition: box-shadow 0.3s ease;
-  text-align: center;
-}
+        .logo {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 10px;
+            object-fit: cover;
+        }
 
-.canal:hover {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
+        .nombre {
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 1px;
+        }
 
-.logo {
-  width: 100px;
-  height: 100px;
-  margin-bottom: 10px;
-  object-fit: cover;
-}
+        .categoria-canal {
+            font-size: 12px;
+            color: #a8a8a8;
+            margin-left: 10px;
+        }
 
-.nombre {
-  font-weight: bold;
-  font-size: 14px;
-  margin-bottom: 1px;
-}
+        /* Estilo para las categorías */
+        #categorias-wrapper {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 10px 20px;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
 
-.categoria-canal {
-  font-size: 12px;
-  color: #a8a8a8;
-  margin-left: 10px;
-}
+        #categorias {
+            display: inline-flex;
+        }
 
-/* Estilo para las categorías */
-#categorias-wrapper {
-  width: 100%;
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 10px 20px;
-  overflow-x: auto;
-  white-space: nowrap;
-}
+        .categoria {
+            display: inline-block;
+            margin-right: 10px;
+            padding: 5px 10px;
+            background-color: #333;
+            color: #fff;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
 
-#categorias {
-  display: inline-flex;
-}
+        .categoria:hover {
+            background-color: #555;
+        }
 
-.categoria {
-  display: inline-block;
-  margin-right: 10px;
-  padding: 5px 10px;
-  background-color: #333;
-  color: #fff;
-  border-radius: 3px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
+        .categoria.active {
+            background-color: #666;
+            font-weight: bold;
+            color: #fff;
+        }
 
-.categoria:hover {
-  background-color: #555;
-}
+        /* Estilos responsivos */
+        @media (max-width: 800px) {
+            #lista-wrapper {
+                padding: 20px 10px;
+            }
 
-.categoria.active {
-  background-color: #666;
-  font-weight: bold;
-  color: #fff;
-}
+            .canal {
+                width: calc(33.33% - 20px);
+                margin: 0 0px 0px;
+            }
+        }
 
-/* Estilos para la sección de favoritos */
-#favoritos-wrapper {
-  width: 100%;
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-}
+        @media (max-width: 600px) {
+            .canal {
+                width: calc(50% - 20px);
+            }
+        }
 
-#favoritos {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.favorito {
-  width: 150px;
-  margin: 0 10px 20px;
-  padding: 10px;
-  background-color: #ffcccc;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-  transition: box-shadow 0.3s ease;
-  text-align: center;
-}
-
-.favorito:hover {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-/* Estilos responsivos */
-@media (max-width: 800px) {
-  #lista-wrapper {
-    padding: 20px 10px;
-  }
-
-  .canal {
-    width: calc(33.33% - 20px);
-    margin: 0 0px 0px;
-  }
-}
-
-@media (max-width: 600px) {
-  .canal {
-    width: calc(50% - 20px);
-  }
-}
-
-@media (max-width: 400px) {
-  .canal {
-    width: 100%;
-  }
-}
-
-</style>
+        @media (max-width: 400px) {
+            .canal {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
 <body>
- 
-  <header>
-    <h1>Reproductor de 7TV</h1>
-  </header>
+    <header>
+        <h1>Reproductor de 76TV</h1>
+    </header>
 
-  <div id="reproductor">
-    <video id="videoPlayer" controls></video>
-  </div>
+    <div id="video-container">
+        <!-- Video.js player will be added here -->
+        <video id="videoPlayer" class="video-js vjs-default-skin" controls preload="auto" width="640" height="360"></video>
+    </div>
+    <div id="categorias-wrapper">
+    <div id="categorias">
+        <!-- Categories will be added here -->
+    </div>
+</div>
 
-  <div id="categorias-wrapper">
-    <div id="categorias"></div>
-  </div>
+    <div id="lista-wrapper">
+        <div id="lista">
+            <!-- Channels list will be added here -->
+        </div>
+    </div>
 
-  <div id="lista-wrapper">
-    <div id="lista"></div>
-  </div>
+
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -209,7 +182,7 @@ document.addEventListener('DOMContentLoaded', function() {
       return cargarFavoritos();
     })
     .then(() => {
-      // Después de cargar los favoritos y la lista de reproducción, mostrar los canales
+      // After loading favorites and the playlist, show the channels
       cargarCanales(canales);
     })
     .catch(error => {
@@ -360,9 +333,19 @@ function crearCategoria(categoria) {
 }
 
 function reproducirCanal(url) {
-  const videoPlayer = document.getElementById('videoPlayer');
-  videoPlayer.src = url;
-  videoPlayer.play();
+  const videoPlayer = videojs('videoPlayer', {
+    sources: [{
+      src: url,
+      type: 'video/mp4' // Update with the appropriate video type if needed
+    }],
+    // Add any additional Video.js options and configurations here
+  });
+
+  // Remove previous players if any
+  const existingPlayer = document.getElementById('videoPlayer');
+  if (existingPlayer) {
+    existingPlayer.dispose();
+  }
 }
 
 function filtrarPorCategoria(categoria) {
@@ -407,10 +390,13 @@ function cargarFavoritos() {
   });
 }
 
-function guardarFavoritos(favoritos) {
+function guardarFavoritos(favoritos) { // Corrige el nombre de la función
   const favoritosJSON = JSON.stringify(favoritos);
   localStorage.setItem('favoritos', favoritosJSON);
 }
+
+// Resto del código JavaScript...
+
 
 function esFavorito(nombre) {
   const canal = canales.find(canal => canal.nombre === nombre);
@@ -436,4 +422,5 @@ function toggleFavorito(nombre) {
 }
 </script>
 </body>
-</html>
+  </html>
+  
