@@ -1,539 +1,419 @@
-      
-       <!-- Created by ahmed ar -->
-
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Page Title</title>
-        <style>
-           /* Created by ahmed ar*/
-
-body{    
-background:rgb(300,300,300);
-font-family: 'Varela Round', sans-serif;     
-}
-#lcon{
-height:100vh;    
-width:100vw;
-background:rgba(0,0,0,.8);
-position:fixed;
-left:0;top:0;    
-}
-#ltxt{
-width:100vw; 
-position:fixed;
-left:0;bottom:7vh;  
-font-weight:1000; 
-font-size:5vw;
-text-align:center;
-color:white;
--webkit-animation:l 2s linear 0s normal infinite;
-}
-#ctxt{
-width:100vw; 
-position:fixed;
-left:0;bottom:2px;  
-font-weight:1000; 
-font-size:2vw;
-text-align:center;
-color:gray;
-}
-@keyframes l {
-50%{color:transparent;} 
-100%{color:white;}  
-}
-#player{
-height:55vw;    
-width:96vw;
-background:linear-gradient(135deg,rgba(300,0,100,.8),rgba( 300,200,100,.8)) ;
-position:absolute;
-left:0;top:0;
-border-radius:8vw;
-overflow:hidden;
--webkit-backdrop-filter:blur(15px);
-box-shadow:0 0 1.5vw gray;
-backdrop-filter:blur(3px);
+<head>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-#pic{
-height:30vw;    
-width:30vw;
-background:rgba(0,0,0,.2);
-position:absolute;
-left:33vw;top:4vw;
-border-radius:50%; 
-box-shadow:0 0 4px black;   
-}
-#ctrlc{
-height:10vw;    
-width:90vw;
-background:rgba(300,300,300,.5);
-position:absolute;
-left:3vw;top:43vw;
-border-radius:50vw;
-}
-#bars{
-width:38vw;height:38vw;
-position:absolute;
-left:29vw;top:0;
--webkit-transform:rotate(-90deg);   
-border-radius:50%;
-}
-#psn{
-height:5vw;width:100%;
-position:absolute;
-left:0;top:38vw;
-text-align:center;
-font-size:3vw;font-weight:1000;
-color:white;
-}
-.ctrl{
-height:4vw;width:4vw;
-position:absolute;
-top:3vw;
-opacity:.6;
-}
-.ctrl1{
-height:5vw;width:5vw;
-position:absolute;
-top:2.5vw;
-opacity:.6;
-}
-.ctrl2{
-height:5.5vw;width:5.5vw;
-position:absolute;
-top:2vw;
-opacity:.6;
-}
-#play{left:43vw;}
-#pause{left:43vw;}
-#next{right:25vw;}
-#prev{left:25vw;-webkit-transform:rotate(-180deg); }
-#suffon{left:8.5vw;}
-#suffoff{left:8.5vw;}
-#norept{right:8.5vw;}
-#allrept{right:8.5vw;}
-#onerept{right:8.5vw;}
-.like{
-height:6vw;width:6vw;
-position:absolute;
-top:3vw;  
-fill:red; 
-}
-.h{left:4.5vw;}
-.d{right:4.5vw;}
-#contr{
-height:97vh;width:96vw;
-position:fixed;
-top:2vw;left:2vw;
-background:rgba(220,220,220,.3); 
-border-radius:8vw; 
-}
-#listin{
-height:calc(97vh-60vw);width:96vw;
-position:absolute;
-top:60vw;left:0;
-background:rgba(300,300,300,.9); 
-border-radius:8vw;overflow:hidden;
-}
-#list{
-height:calc(97vh-60vw);width:94vw;
-position:absolute;
-top:9vw;left:1vw;
-background:rgba(0,0,0,.2); 
-border-radius:7.5vw; 
-overflow-x:hidden;
-overflow-y:scroll;
+body {
+  background-color: #f2f2f2;
+  font-family: Arial, sans-serif;
 }
 
-#album{
-height:4.5vw;    
-width:4.5vw;
+header {
+  background-color: #333;
+  padding: 20px;
+  color: #fff;
 }
-#timecon{
-/*height:4vw;*/
-width:25vw;
-position:absolute;
-top:17.5vw;left:35.5vw;
-background:rgba(300,300,300,.9); 
-border-radius:7.5vw;  
-font-size:3vw;  
-font-weight:1000;
-text-align:center;  
-padding:0 .3vw 0 .2vw;
-}
-.albd{
-position:relative;
-top:-4vw;
-font-weight:1000;
-font-size:4vw;
-}
-#songs{
-padding:1vw 2vw 1vw 2vw;
-position:relative;
-top:2vw;left:2vw;
-font-weight:1000;
-font-size:2vw;
-color:red;
-}
-.strp{
-height:20vw;width:92vw;  
-background:linear-gradient(135deg,rgba(300,0,100,.8),rgba( 300,200,100,.8)) ;
-margin:1vw 1vw 1vw 1vw;
-border-radius:7vw;
-}
-.sti{
-display:inline-block;
-height:14vw;width:14vw;  
-background:white;
-margin:2vw 2vw;
-border-radius:6vw;   
-border:1vw solid white; 
 
+h1 {
+  margin: 0;
+  font-size: 24px;
 }
-.strl{
-height:11vw;width:11vw;  
-position:relative;
-right:-27vw;top:-17vw;
-}
-.stn{
-height:5vw;width:50vw;  
-display:inline-block;
-position:relative;
-top:-13vw;left:1vw;
-font-size:2.8vw;  
-font-weight:1000;
-text-align:left;  
-color:white;
-}
-.art{
-height:5vw;width:50vw;  
-display:inline-block;
-position:relative;
-top:-18vw;left:22vw;
-font-size:2.8vw;  
-font-weight:1000;
-text-align:left;  
-color:white;
-}
-.tolk{
-width:10vw;
-display:inline-block;
-text-align:center;
-font-size:3.2vw;
-font-weight:1000;
-position:relative;
-right:-16.5vw;top:-22.5vw;
-color:white;
-}
-            
-        </style>
-<link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
-<script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script> 
-    </head>
-    <body>
-<audio id="audio" src="" preload="none" autoplay></audio>
-<!– imagen de fondo –>
-<img style="height:100vh;width:100vw;position:fixed;left:0;top:0;"src="https://www.dropbox.com/s/1tadmadhei645i4/f175eb4e1806f055f7ea35622e773424.jpg?dl=0&raw=1"/>  
-<div id="contr">  
-<div id="player">
-<img id="holo"class="like h"src="https://www.dropbox.com/s/cyp5jcbebuk56uy/heart.svg?dl=0&raw=1"/>
-<img id="fill"class="like h" style="display:none;"src="https://www.dropbox.com/s/raf3h9mpltg7v1s/heart%20%281%29.svg?dl=0&raw=1"/>
-<a id="dl" href=""><img class="like d"src="https://www.dropbox.com/s/fpxrbaxbx0m5css/direct-download.svg?dl=0&raw=1"/></a>
-<svg viewbox="0 0 100 100" id="bars" ><circle cx='50'cy='50'r='45'stroke='rgba(300,300,300,.5)'stroke-width='3'fill='none'></circle>
-<circle id="seekbar" cx='50'cy='50'r='45'stroke='red'stroke-width='3'fill='none'stroke-linecap='round'stroke-dasharray='282.8571'stroke-dashoffset="282.8571"></circle><svg></svg>
-<img id="pic" src=""/>
-<span id="timecon"><span id="cur">00:00</span> | <span id="dur">00:00</span></span></span>
-<span id="psn">Unknown</span>
-<div id="ctrlc">
-<img id="play" class="ctrl" src="https://www.dropbox.com/s/5t5p7cnb5p6tg4n/27223.svg?dl=0&raw=1"/>  
-<img id="pause" style="display:none;" class="ctrl"src="https://www.dropbox.com/s/phbo4fog5xf2xj0/151859.svg?dl=0&raw=1"/>
-<img id="suffoff" class="ctrl1" src="https://www.dropbox.com/s/wo9qy1p0ms02btg/35737.svg?dl=0&raw=1"/>  
-<img id="suffon" style="display:none;" class="ctrl1"src="https://www.dropbox.com/s/3cbxkoa7nax5vjm/shuffle-arrows-hand-drawn-symbol.svg?dl=0&raw=1"/>
 
-<img id="norept" class="ctrl2" style="display:none;" src="https://www.dropbox.com/s/5od07so3g27relj/no%20repeat.svg?dl=0&raw=1"/>  
-<img id="allrept" class="ctrl2"src="https://www.dropbox.com/s/df5pj5okf5kblfo/pink%20repeat%20all.svg?dl=0&raw=1"/>
-<img id="onerept" style="display:none;" class="ctrl2" src="https://www.dropbox.com/s/yhzclugsvmr2qu9/pink%20repeat%20one.svg?dl=0&raw=1"/>  
+#reproductor {
+  width: 100%;
+  max-width: 800px;
+  height: 0;
+  padding-bottom: 56.25%;
+  margin: 20px auto;
+  position: relative;
+}
 
+#videoPlayer {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
 
-<img id="next" class="ctrl"src="https://www.dropbox.com/s/iq49o6kwmbj80ba/254428.svg?dl=0&raw=1"/>
-<img id="prev" class="ctrl"src="https://www.dropbox.com/s/iq49o6kwmbj80ba/254428.svg?dl=0&raw=1"/>
-</div>   
-</div>
-<div id="listin">
-<span id="songs">0 songs</span><center>
-<img id="album" class="albd"src="https://www.dropbox.com/s/w6i7e5tuh0k86s2/4498521.svg?dl=0&raw=1"/><span class="albd">مكتبة الموسيقى</span></center><div id="list"></div></div></div><div id="lcon">
+#lista-wrapper {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  overflow-y: auto;
+  max-height: 400px;
+}
 
-<div id="ltxt">...جارى التحميل </div>    
-<div id="ctxt">Copyright @Ahmed ar</div>    
-</div>
-<script>
-    // Created by ahmed ar
+#lista {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
 
-eval("\x66\x69\x72\x65\x62\x61\x73\x65\x2e\x69\x6e\x69\x74\x69\x61\x6c\x69\x7a\x65\x41\x70\x70\x28\x7b\x64\x61\x74\x61\x62\x61\x73\x65\x55\x52\x4c\x3a\x22\x68\x74\x74\x70\x73\x3a\x2f\x2f\x73\x61\x6e\x2d\x66\x64\x31\x31\x61\x2e\x66\x69\x72\x65\x62\x61\x73\x65\x69\x6f\x2e\x63\x6f\x6d\x22\x7d\x29") 
-var D = firebase.database();
-Getval=function(path,Bval){
-D.ref(path).on("value",function (s){Bval(s.val());});}
-Update=function(Bval,path){
-D.ref(path).update(Bval);}
-window.onload=function(){
-const $=function(s){return document.getElementById(s)};
-const stf=function(s){sec=Math.ceil(s%60)-(Math.ceil(s%60)?1:0);
-S=sec<10?'0'+sec:sec;M="0"+(parseInt(s/60));return M+':'+S;}
-var Like=[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1];
-//Update({like:Like})
-var seekbar=$("seekbar"),srklen=(44*45)/7,audio=$("audio"),barR,shuffle=false,repeatMode="all",Now=3;
-$("listin").style.height=window.innerHeight*.97-window.innerWidth*.6+"px";
-$("list").style.height=window.innerHeight*.97-window.innerWidth*.7+"px";
-var Songs=[
-{  name:"Tum Hi Ho",
-   iurl:"https://www.dropbox.com/s/blqsl3c1wmxecvb/size_xxl.webp?dl=0&raw=1",
-   surl:"https://www.dropbox.com/s/3jtclblbhfoyde0/Tum_Hi_Ho_Lyrics_with_full_song-Aashiqui_2_movie_song%28256k%29.mp3?dl=0&raw=1",
-    art:"Arijit Singh",
-    dur:"04:21",
-    like:false
-},
-{  name:"Chahun Main Ya Naa",
-   iurl:"https://www.dropbox.com/s/blqsl3c1wmxecvb/size_xxl.webp?dl=0&raw=1",
- surl:"https://www.dropbox.com/s/vmpep6g0tk3kanc/chahun-main-ya-naa-%28pagalworldsongs.co.in%29.mp3?dl=0&raw=1",
-    art:"Arijit Singh & Palak Muchhal",
-    dur:"05:04",
-    like:false
-},
-{  name:"Khamoshiyan",
-   iurl:"https://www.dropbox.com/s/ct7o7spnb7rfd34/id3picture_863613150.jpg?dl=0&raw=1",
-   surl:"https://www.dropbox.com/s/fcrlnie00lvh2ba/khamoshiyan%20-%20khamoshiyan%20128%20kbps.mp3?dl=0&raw=1",
-    dur:"05:35",
-    art:"Arijit Singh & Jeet Gannguli",
-    like:false
-}, 
-{  name:"Ae Dil Hai Mushkil",
-   iurl:"https://www.dropbox.com/s/vb4cpaeak1m7y2s/ae-dil-hai-mushkil-hindi-2016-500x500.jpg?dl=0&raw=1",
-   surl:"https://www.dropbox.com/s/ev8cvw75nuq20tu/Ae_dil_hai_mushkil..mp3?dl=0&raw=1",
-    dur:"05:00",
-    art:"Arijit Singh",
-    like:false
-}, 
-{  name:"Pal Ek Pal",
-   iurl:"https://www.dropbox.com/s/voivi0jkyak1q6v/crop_480x480_1536745597.jpg?dl=0&raw=1",
-   surl:"https://www.dropbox.com/s/f45ws5lmlxwvm6l/Pal_ek_pal..mp3?dl=0&raw=1",
-    dur:"04:57",
-    art:"Arijit Singh & Shreya Ghoshal",
-    like:false
-},
-{  name:"Aasan Nahin Yahan",
-   iurl:"https://www.dropbox.com/s/blqsl3c1wmxecvb/size_xxl.webp?dl=0&raw=1",
-   surl:"https://www.dropbox.com/s/vqllxo5w9pbyfhx/aasan%20nahin%20yahan.mp3?dl=0&raw=1",
-    dur:"03:34",
-    art:"Arijit Singh",
-    like:false
-},
-{  name:"Uska Hi Banana",
-   iurl:"https://www.dropbox.com/s/h6susbpx6k4dd9b/crop_480x480_114186.jpg?dl=0&raw=1",
-   surl:"https://www.dropbox.com/s/1eunjd0zunvylbd/b-uska-hi-banana--%5Bpagalworldsongs.co.in%5D-%28pagalworldsongs.co.in%29.mp3?dl=0&raw=1",
-    dur:"05:27",
-    art:"Arijit Singh",
-    like:false
-},
-{  name:"Chhod Diya",
-   iurl:"https://www.dropbox.com/s/kkgfjk5nizgvarf/crop_480x480_1569642315.jpg?dl=0&raw=1",
-   surl:"https://www.dropbox.com/s/uvxhn6rtlkufmrn/chhod%20diya%20-%20baazaar%20128%20kbps.mp3?dl=0&raw=1",
-    dur:"05:19",
-    art:"Arijit Singh",
-    like:false
-},
-{  name:"Pachtaoge",
-   iurl:"https://www.dropbox.com/s/cknf5l47qhifs92/crop_480x480_1566542675-1.jpg?dl=0&raw=1",
-   surl:"https://www.dropbox.com/s/6dy9q19xmppkayp/pachtaoge%20-%20arijit%20singh%20320%20kbps.mp3?dl=0&raw=1",
-    dur:"03:46",
-    art:"Arijit Singh",
-    like:false
-},
-{  name:"Channa Mereya",
-   iurl:"https://www.dropbox.com/s/wndyf518p8l6z58/crop_480x480_1778849.jpg?dl=0&raw=1",
-   surl:"https://www.dropbox.com/s/ri3memha8u0zeyp/channa_mereya%20%28ae_dil_hai_mushkil%29_320_kbps.mp3?dl=0&raw=1",
-    dur:"04:49",
-    art:"Arijit Singh & Pritam Chakraborty",
-    like:false
-},
-{  name:"Kabhi Jo Baadal Barse",
-   iurl:"https://www.dropbox.com/s/1a6sq05rwztqu12/crop_480x480_1083538-1.jpg?dl=0&raw=1",
-   surl:"https://www.dropbox.com/s/t4z16qool1t2zap/kabhi%20jo%20baadal%20barse%20-%20%28amlijatt.in%29.mp3?dl=0&raw=1",
-    dur:"04:14",
-    art:"Arijit Singh",
-    like:false
-},
-{  name:"Ik Vaari Aa",
-   iurl:"https://www.dropbox.com/s/9rmyo6bhvyiywtp/crop_480x480_1516001169.jpg?dl=0&raw=1",
-   surl:"https://www.dropbox.com/s/y3evdds1qaor36p/Ik%20Vaari%20Aa%20Full%20Song%20%20Raabta%20%20Sushant%20Singh%20Rajput%20%26%20Kriti%20Sanon%20%20Pritam%20Arijit%20Singh%20Amitabh%20B?dl=1&raw=1",
-    art:"Arijit Singh",
-    dur:"03:47",
-    like:false
-},
-{  name:"Phir Bhi Tumko Chaahunga",
-   iurl:"https://www.dropbox.com/s/3bfrfe3538mb8g4/crop_480x480_1516001106-1.jpg?dl=0&raw=1",
-   surl:"https://www.dropbox.com/s/810j0g4euh1e4se/phir-bhi-tumko-chahunga-%28pagalworldsongs.co.in%29.mp3?dl=0&raw=1",
-    art:"Arijit Singh & Shashaa Tirupati",
-    dur:"05:51",
-    like:false
-},
-{  name:"Thodi Jagah",
-   iurl:"https://www.dropbox.com/s/dsgpx3baelfkkpr/crop_175x175_1571647214.jpg?dl=0&raw=1",
-   surl:"https://www.dropbox.com/s/0rb5jr56e1d1r55/thodi-jagah-%28marjaavaan%29-128kbps-%28bigmusic.in%29.mp3?dl=0&raw=1",
-    art:"Arijit Singh",
-    dur:"03:38",
-    like:false
-},
-{  name:"Khairiyat",
-   iurl:"https://www.dropbox.com/s/944yovep5jrdg4m/crop_480x480_1567516167_2772458.jpg?dl=0&raw=1",
-   surl:"https://www.dropbox.com/s/3uw9p3fp0lqdqkh/khairiyat-sad-b-chhichhore-%28pagalworldsongs.co.in%29.mp3?dl=0&raw=1",
-    art:"Arijit Singh",
-    dur:"04:31",
-    like:false
-},
-{  name:"Aabaad Barbaad",
-   iurl:"https://www.dropbox.com/s/i0w5gdmfnv6a4dl/arijit-singh-wiki.jpg?dl=0&raw=1",
-   surl:"https://www.dropbox.com/s/f3og2vaatveez4v/aabaad%20barbaad%20-%20arijit%20singh.mp3?dl=0&raw=1",
-    art:"Arijit Singh",
-    dur:"05:09",
-    like:false
-},
-{  name:"Janam Janam",
-   iurl:"https://www.dropbox.com/s/1z6z9gdh0vxs53s/crop_480x480_1573497.jpg?dl=0&raw=1",
-   surl:"https://www.dropbox.com/s/izuo4aenyswsang/janam%20janam%20%5B320%20kbps%5D.mp3?dl=0&raw=1",
-    art:"Arijit Singh & Antara Mitra",
-    dur:"03:57",
-    like:false
-},
-{  name:"Humdard",
-   iurl:"https://www.dropbox.com/s/pumflsim3egw86i/crop_480x480_198669.jpg?dl=0&raw=1",
-   surl:"https://www.dropbox.com/s/nkajbheyoq3u4u4/05%20hamdard%20-%20ek%20villain%20%28%20pagalworld.com%20%29.mp3?dl=0&raw=1",
-    art:"Arijit Singh",
-    dur:"04:20",
-    like:false
-},
-{  name:"Hawayein",
-   iurl:"https://www.dropbox.com/s/8pr18hwdfjzot7i/crop_480x480_1516002119.jpg?dl=0&raw=1",
-   surl:"https://www.dropbox.com/s/tztc3zib3bvzz9k/hawayein%20%28jab%20harry%20met%20sejal%29%20128%20kbps.mp3?dl=0&raw=1",
-    art:"Arijit Singh",
-    dur:"04:50",
-    like:false
-},
-];
-$("songs").textContent=Songs.length+" SONGS";
-Getval('like',function(d){
-Like=d;    
-for(var i=0;i<Songs.length;i++){
-new $("l"+i).textContent=Like[i];
+.canal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 120px;
+  margin: 0 10px 20px;
+  padding: 10px;
+  background-color: #ffff;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: box-shadow 0.3s ease;
 }
-$('lcon').style.display="none";
-})
-var Set=function(n){
-audio.src=Songs[n].surl;
-$("pic").src=Songs[n].iurl;
-$("dur").textContent=Songs[n].dur;
-$("psn").textContent=Songs[n].name;
-seekbar.style.strokeDashoffset=srklen;
-$("dl").href=Songs[n].surl.replace("dl=0","dl=1")
-if(Songs[n].like){
-$("holo").style.display="none"
-$("fill").style.display="block"
-}else{
-$("holo").style.display="block"
-$("fill").style.display="none"}
-}
-Set(Now);
-var strpset=function(n){$("s"+n).onclick=function(){Now=n;Set(Now);play()}};
 
-var play=function(){ $("play").style.display="none";
-$("pause").style.display="block"; 
-var playPromise =audio.play();if(playPromise !== undefined){playPromise.then(function(){}).catch(function(error){});}
+.logo-container {
+  position: relative;
 }
-var pause=function(){ $("pause").style.display="none";
-$("play").style.display="block"; 
-var playPromise =audio.pause();if(playPromise !== undefined){playPromise.then(function(){}).catch(function(error){});}
-}
-var suffoff=function(){
-$("suffoff").style.display="none";
-$("suffon").style.display="block";  
-shuffle=true;  
-}
-var suffon=function(){
-$("suffoff").style.display="block";
-$("suffon").style.display="none"; 
-shuffle=false;     
-}
-var norept=function(){
-$("norept").style.display="none";
-$("allrept").style.display="block";  
-repeatMode="all"  
-}
-var allrept=function(){
-$("allrept").style.display="none";
-$("onerept").style.display="block"; 
-repeatMode="one"     
-}
-var onerept=function(){
-$("onerept").style.display="none";
-$("norept").style.display="block"; 
-repeatMode="no"   
-}
-$("next").onclick=function(){Now>Songs.length-2?Now=0:Now+=1;Set(Now);play()}
-$("prev").onclick=function(){Now<1?Now=Songs.length-1:Now-=1;Set(Now);play()}
 
-audio.ontimeupdate=function(){
-$("cur").textContent=stf(audio.currentTime);
-seekbar.style.strokeDashoffset=srklen-(audio.currentTime/audio.duration)*srklen;
+.logo {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
 }
-audio.onended=function(){
-if(repeatMode=="no"){pause();}
-if(repeatMode=="one"){play();}
-if(repeatMode=="all"&&!shuffle){Now>Songs.length-2?Now=0:Now+=1;Set(Now);play()}
-if(repeatMode=="all"&&shuffle){Now=(Math.ceil(Math.random()*Songs.length)-1);Set(Now);play()}
-}
-$("play").onclick=function(){play()}
-$("pause").onclick=function(){pause()}
-$("suffon").onclick=function(){suffon()}
-$("suffoff").onclick=function(){suffoff()}
-$("norept").onclick=function(){norept()}
-$("allrept").onclick=function(){allrept()}
-$("onerept").onclick=function(){onerept()}
 
-$("holo").onclick=function(){
-$("holo").style.display="none";
-$("fill").style.display="block";
-Like[Now]+=1;Update({like:Like})
-Songs[Now].like=true;
+.corazon {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: 20px;
 }
-$("fill").onclick=function(){
-$("holo").style.display="block";
-$("fill").style.display="none"; 
-Like[Now]-=1;Update({like:Like})
-Songs[Now].like=false;
+
+.nombre {
+  font-weight: bold;
+  font-size: 14px;
+  margin-top: 5px;
 }
-var touch=function(e){
-e.cancelable?e.preventDefault():'';
-var x=e.touches[0].pageX,y=e.touches[0].pageY,w=window.innerWidth,ang=(Math.atan2(y-w*.21,x-w*.5)*180)/(22/7),angle=ang>0?90+ang:(450+ang)<360?450+ang:90+ang;
-barR=((360-angle)/360)
-seekbar.style.strokeDashoffset=srklen*barR;
+
+.categoria-canal {
+  font-size: 12px;
+  color: #a8a8a8;
+  margin-top: 2px;
 }
-$("bars").ontouchstart=touch;
-$("bars").ontouchmove=touch;
-$("bars").ontouchend=function(){
-try{
-audio.currentTime=audio.duration-barR*audio.duration;
-}catch(er){}  
-$("cur").textContent=stf(audio.duration-barR*audio.duration);
+
+/* Estilo para las categorías */
+#categorias-wrapper {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 10px 20px;
+  overflow-x: auto;
+  white-space: nowrap;
 }
-for(var i=0;i<Songs.length;i++){
-$('list').innerHTML+="<div class='strp' id='s"+i+"'><img class='sti'src='"+Songs[i].iurl+"'/>  <span class='stn'>"+Songs[i].name+" . "+Songs[i].dur+"</span><span class='art'>"+Songs[i].art+"</span><img class='strl' src='https://www.dropbox.com/s/cyp5jcbebuk56uy/heart.svg?dl=0&raw=1'/><span class='tolk'id='l"+i+"'>0</span></div>";  
-};for(var i=0;i<Songs.length;i++){new strpset(i)}
+
+#categorias {
+  display: inline-flex;
 }
-    
-</script>
-    </body>
-</html>
-        
-        
-        
+
+.categoria {
+  display: inline-block;
+  margin-right: 10px;
+  padding: 5px 10px;
+  background-color: #333;
+  color: #fff;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.categoria:hover {
+  background-color: #555;
+}
+
+.categoria.active {
+  background-color: #666;
+  font-weight: bold;
+  color: #fff;
+}
+
+/* Estilos para la sección de favoritos */
+#favoritos-wrapper {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+#favoritos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.favorito {
+  width: 150px;
+  margin: 0 10px 20px;
+  padding: 10px;
+  background-color: #ffcccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: box-shadow 0.3s ease;
+  text-align: center;
+}
+
+.favorito:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilos responsivos */
+@media (max-width: 800px) {
+  #lista-wrapper {
+    padding: 20px 10px;
+  }
+
+  .canal {
+    width: calc(33.33% - 20px);
+    margin: 0 0px 0px;
+  }
+}
+
+@media (max-width: 600px) {
+  .canal {
+    width: calc(50% - 20px);
+  }
+}
+
+@media (max-width: 400px) {
+  .canal {
+    width: 100%;
+  }
+}
+
+</style>
+</head>
+<body>
  
+  <header>
+    <h1>Reproductor de TV</h1>
+  </header>
+
+  <div id="reproductor">
+    <video id="videoPlayer" controls></video>
+  </div>
+
+  <div id="categorias-wrapper">
+    <div id="categorias"></div>
+  </div>
+
+  <div id="lista-wrapper">
+    <div id="lista"></div>
+  </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const archivoM3U = 'https://raw.githubusercontent.com/Pamanya/canales/main/List.m3u';
+  
+  cargarListaReproduccion(archivoM3U)
+    .then(() => {
+      return cargarFavoritos();
+    })
+    .then(() => {
+      // Después de cargar los favoritos y la lista de reproducción, mostrar los canales
+      cargarCanales(canales);
+    });
+});
+
+const canales = [];
+const favoritos = [];
+
+function cargarListaReproduccion(archivo) {
+  return fetch(archivo)
+    .then(response => response.text())
+    .then(data => {
+      const lineas = data.split('\n');
+      const categorias = {};
+      const listaDiv = document.getElementById('lista');
+      const categoriasDiv = document.getElementById('categorias');
+
+      const categoriaFavoritosDiv = crearCategoria('Favoritos');
+      categoriasDiv.appendChild(categoriaFavoritosDiv);
+
+      for (let i = 0; i < lineas.length; i++) {
+        const linea = lineas[i].trim();
+        if (linea.startsWith('#EXTINF:-1')) {
+          const nombre = linea.split('tvg-name="')[1].split('"')[0];
+          const logo = linea.split('tvg-logo="')[1].split('"')[0];
+          const categoria = linea.split('group-title="')[1].split('"')[0];
+          const url = lineas[i + 1].trim();
+
+          const canal = {
+            nombre: nombre,
+            logo: logo,
+            categoria: categoria,
+            url: url,
+            esFavorito: false,
+            mostrar: true
+          };
+
+          canales.push(canal);
+
+          if (!categorias[categoria]) {
+            categorias[categoria] = true;
+            const categoriaDiv = crearCategoria(categoria);
+            categoriasDiv.appendChild(categoriaDiv);
+          }
+        }
+      }
+    });
+}
+
+function cargarCanales(canales) {
+  const listaDiv = document.getElementById('lista');
+  listaDiv.innerHTML = '';
+
+  for (let i = 0; i < canales.length; i++) {
+    const canal = canales[i];
+    if (canal.mostrar) {
+      const canalDiv = crearCanal(canal.nombre, canal.logo, canal.categoria, canal.url, esFavorito(canal.nombre));
+      listaDiv.appendChild(canalDiv);
+    }
+  }
+}
+
+function crearCanal(nombre, logo, categoria, url, esFavorito) {
+  const canalDiv = document.createElement('div');
+  canalDiv.className = 'canal';
+
+  const logoContainer = document.createElement('div');
+  logoContainer.className = 'logo-container';
+
+  const logoImg = document.createElement('img');
+  logoImg.src = logo;
+  logoImg.className = 'logo';
+
+  const corazonSpan = document.createElement('span');
+  corazonSpan.textContent = esFavorito ? '♥️' : '🖤';
+  corazonSpan.className = 'corazon';
+
+  logoContainer.appendChild(logoImg);
+  logoContainer.appendChild(corazonSpan);
+  canalDiv.appendChild(logoContainer);
+
+  const nombreSpan = document.createElement('span');
+  nombreSpan.textContent = nombre;
+  nombreSpan.className = 'nombre';
+  canalDiv.appendChild(nombreSpan);
+
+  const categoriaSpan = document.createElement('span');
+  categoriaSpan.textContent = categoria;
+  categoriaSpan.className = 'categoria-canal';
+  canalDiv.appendChild(categoriaSpan);
+
+  canalDiv.addEventListener('click', function(event) {
+    reproducirCanal(url);
+  });
+
+  corazonSpan.addEventListener('click', function(event) {
+    event.stopPropagation();
+    toggleFavorito(nombre);
+    corazonSpan.textContent = esFavorito(nombre) ? '♥️' : '🖤';
+  });
+
+  return canalDiv;
+}
+
+function crearCategoria(categoria) {
+  const categoriaDiv = document.createElement('div');
+  categoriaDiv.className = 'categoria';
+  categoriaDiv.textContent = categoria;
+  categoriaDiv.setAttribute('mostrar', 'true');
+
+  categoriaDiv.addEventListener('click', function() {
+    filtrarPorCategoria(categoria);
+  });
+
+  return categoriaDiv;
+}
+
+function reproducirCanal(url) {
+  const videoPlayer = document.getElementById('videoPlayer');
+  videoPlayer.src = url;
+  videoPlayer.play();
+}
+
+function filtrarPorCategoria(categoria) {
+  const listaDiv = document.getElementById('lista');
+
+  for (let i = 0; i < canales.length; i++) {
+    const canal = canales[i];
+    if (categoria === 'Todos' || canal.categoria === categoria) {
+      canal.mostrar = true;
+    } else if (categoria === 'Favoritos') {
+      canal.mostrar = esFavorito(canal.nombre);
+    } else {
+      canal.mostrar = false;
+    }
+  }
+
+  cargarCanales(canales);
+
+  const categoriasDiv = document.getElementById('categorias');
+  const categorias = categoriasDiv.getElementsByClassName('categoria');
+
+  for (let i = 0; i < categorias.length; i++) {
+    if (categorias[i].textContent === categoria) {
+      categorias[i].classList.add('active');
+    } else {
+      categorias[i].classList.remove('active');
+    }
+  }
+}
+
+function cargarFavoritos() {
+  return new Promise((resolve) => {
+    const favoritosJSON = localStorage.getItem('favoritos');
+    if (favoritosJSON) {
+      favoritos.push(...JSON.parse(favoritosJSON));
+      // Marcar los canales como favoritos según los favoritos cargados
+      for (const canal of canales) {
+        canal.esFavorito = favoritos.includes(canal.nombre);
+      }
+    }
+    resolve(); // Resuelve la promesa después de cargar los favoritos
+  });
+}
+
+function guardarFavoritos(favoritos) {
+  const favoritosJSON = JSON.stringify(favoritos);
+  localStorage.setItem('favoritos', favoritosJSON);
+}
+
+function esFavorito(nombre) {
+  const canal = canales.find(canal => canal.nombre === nombre);
+  return canal ? canal.esFavorito : false;
+}
+
+function toggleFavorito(nombre) {
+  const canal = canales.find(canal => canal.nombre === nombre);
+  if (!canal) return;
+
+  canal.esFavorito = !esFavorito(nombre);
+  if (canal.esFavorito) {
+    favoritos.push(nombre);
+  } else {
+    const index = favoritos.indexOf(nombre);
+    if (index !== -1) {
+      favoritos.splice(index, 1);
+    }
+  }
+
+  guardarFavoritos(favoritos); // Guardar los favoritos actualizados en el almacenamiento local
+  cargarCanales(canales);
+}
+``
+
+
+
+</script>
+</body>
+      </html>
+      
